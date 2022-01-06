@@ -13,4 +13,5 @@ public class LogicCircuit {
     public boolean execute(){
         return be.calculate();
     }
+
 }
