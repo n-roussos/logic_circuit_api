@@ -11,35 +11,33 @@ class LogicCircuitTest {
      */
     @Test
     public void testX1andX2() {
-        // make the circuit       
-        boolean x1, x2;
+        // make the circuit
         BooleanExpression in1, in2, andGate;
+        LogicCircuit lc;
 
         // test the circuit for different inputs
-        x1 = false;
-        x2 = false;
-        in1 = new BooleanConstant(x1);
-        in2 = new BooleanConstant(x2);
+        in1 = new BooleanConstant(false);
+        in2 = new BooleanConstant(false);
         andGate = new AndGate(in1, in2);
-        LogicCircuit lc = new LogicCircuit(andGate);
+        lc = new LogicCircuit(andGate);
         assertEquals(false, lc.execute());
 
-        x1 = false;
-        x2 = true;
-        in1 = new BooleanConstant(x1);
-        in2 = new BooleanConstant(x2);
+        in1 = new BooleanConstant(false);
+        in2 = new BooleanConstant(true);
+        andGate = new AndGate(in1, in2);
+        lc = new LogicCircuit(andGate);
         assertEquals(false, lc.execute());
 
-        x1 = true;
-        x2 = false;
-        in1 = new BooleanConstant(x1);
-        in2 = new BooleanConstant(x2);
+        in1 = new BooleanConstant(true);
+        in2 = new BooleanConstant(false);
+        andGate = new AndGate(in1, in2);
+        lc = new LogicCircuit(andGate);
         assertEquals(false, lc.execute());
 
-        x1 = true;
-        x2 = true;
-        in1 = new BooleanConstant(x1);
-        in2 = new BooleanConstant(x2);
+        in1 = new BooleanConstant(true);
+        in2 = new BooleanConstant(true);
+        andGate = new AndGate(in1, in2);
+        lc = new LogicCircuit(andGate);
         assertEquals(true, lc.execute());
     }
 
@@ -50,20 +48,27 @@ class LogicCircuitTest {
      */
     @Test
     public void testX1andX2orX3() {
-        // make the circuit        
-        //LogicCircuit lc = ...;
-        boolean x1, x2, x3;
 
-        // test the circuit for different inputs        
-        x1 = false;
-        x2 = true;
-        x3 = false;
-        assertEquals(false, " circuit output");
+        // make the circuit
+        BooleanExpression in1, in2, in3, andGate, orGate;
+        LogicCircuit lc;
 
-        x1 = true;
-        x2 = false;
-        x3 = true;
-        assertEquals(true, " circuit output");
+        // test the circuit for different inputs
+        in1 = new BooleanConstant(false);
+        in2 = new BooleanConstant(true);
+        in3 = new BooleanConstant(false);
+        andGate = new AndGate(in1, in2);
+        orGate = new OrGate(andGate, in3);
+        lc = new LogicCircuit(orGate);
+        assertEquals(false, lc.execute());
+
+        in1 = new BooleanConstant(true);
+        in2 = new BooleanConstant(false);
+        in3 = new BooleanConstant(true);
+        andGate = new AndGate(in1, in2);
+        orGate = new OrGate(andGate, in3);
+        lc = new LogicCircuit(orGate);
+        assertEquals(true, lc.execute());
     }
 
     /**
@@ -72,15 +77,22 @@ class LogicCircuitTest {
      */
     @Test
     public void testAlwaysTrue() {
-        // make the circuit   
-        //LogicCircuit lc = ...;
-        boolean x1;
-        // test the circuit for different inputs
-        x1 = false;
-        assertEquals(true, " circuit output");
+        // make the circuit
+        BooleanExpression in1, notGate, orGate;
+        LogicCircuit lc;
 
-        x1 = true;
-        assertEquals(true, " circuit output");
+        // test the circuit for different inputs
+        in1 = new BooleanConstant(false);
+        notGate = new NotGate(in1);
+        orGate = new OrGate(in1, notGate);
+        lc = new LogicCircuit(orGate);
+        assertEquals(true, lc.execute());
+
+        in1 = new BooleanConstant(true);
+        notGate = new NotGate(in1);
+        orGate = new OrGate(in1, notGate);
+        lc = new LogicCircuit(orGate);
+        assertEquals(true, lc.execute());
     }
 
 }
