@@ -9,8 +9,13 @@ package LogicCircuitAPI;
  * @author Panikos
  */
 public class NotGate extends BooleanUnaryExpression{
+    
+    public NotGate(BooleanExpression operand){
+        in1 = operand;
+    }
+    
     @Override
-    public void calculate(){
-        
+    public boolean calculate(){
+        return !(in1.calculate());
     }
 }

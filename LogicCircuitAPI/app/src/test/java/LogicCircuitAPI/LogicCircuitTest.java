@@ -15,25 +15,29 @@ class LogicCircuitTest {
     @Test
     public void testX1andX2() {
         // make the circuit       
-	//LogicCircuit lc = ...;
         boolean x1, x2;
+        BooleanExpression in1, in2, andGate;
         
         // test the circuit for different inputs
         x1 = false;
 	x2 = false;
-        assertEquals(false, " circuit output"); 
+        in1 = new BooleanConstant(x1);
+        in2 = new BooleanConstant(x2);
+        andGate = new AndGate(in1, in2);
+        LogicCircuit lc = new LogicCircuit(andGate);
+        assertEquals(false, lc.execute()); 
         
  	x1 = false;
 	x2 = true;
-        assertEquals(false, " circuit output");
+        assertEquals(false, lc.execute());
         
         x1 = true;
 	x2 = false;
-        assertEquals(false, " circuit output"); 
+        assertEquals(false, lc.execute()); 
         
         x1 = true;
         x2 = true;
-        assertEquals(true, " circuit output");
+        assertEquals(true, lc.execute());
     }
     
     /** 

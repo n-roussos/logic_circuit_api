@@ -9,5 +9,5 @@ package LogicCircuitAPI;
  * @author Panikos
  */
 public abstract class BooleanUnaryExpression extends BooleanExpression{
-
+    protected BooleanExpression in1;
 }

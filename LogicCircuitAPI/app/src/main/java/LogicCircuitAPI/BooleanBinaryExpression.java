@@ -9,5 +9,5 @@ package LogicCircuitAPI;
  * @author Panikos
  */
 public abstract class BooleanBinaryExpression extends BooleanExpression{
-    
+    protected BooleanExpression in1, in2;
 }

@@ -4,5 +4,13 @@
 package LogicCircuitAPI;
 
 public class LogicCircuit {
+    private BooleanExpression be;
     
+    public LogicCircuit(BooleanExpression booleanExpression){
+        be = booleanExpression;
+    }
+    
+    public boolean execute(){
+        return be.calculate();
+    }
 }

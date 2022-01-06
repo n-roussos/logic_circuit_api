@@ -9,8 +9,14 @@ package LogicCircuitAPI;
  * @author Panikos
  */
 public class AndGate extends BooleanBinaryExpression{
+    
+    public AndGate(BooleanExpression operand1, BooleanExpression operand2){
+        in1 = operand1;
+        in2 = operand2;
+    }
+    
     @Override
-    public void calculate(){
-        
+    public boolean calculate(){
+        return ((in1.calculate()) && (in2.calculate()));
     }    
 }

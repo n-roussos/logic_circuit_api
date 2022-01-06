@@ -9,8 +9,14 @@ package LogicCircuitAPI;
  * @author Panikos
  */
 public class BooleanConstant extends BooleanExpression{
+    private final boolean value;
+    
+    public BooleanConstant(boolean constant){
+        value = constant;
+    }
+    
     @Override
-    public void calculate(){
-        
+    public boolean calculate(){
+        return value;
     }
 }
