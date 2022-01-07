@@ -65,7 +65,7 @@ public class OrGate extends BooleanBinaryExpression{
     }
 
     private boolean areArgumentsDifferent(Boolean key1, Boolean key2){
-        return (isTypeBoolean(key1) && isTypeDouble(key2));
+        return (isTypeBoolean(key1) == isTypeDouble(key2));
     }
 
     private boolean isTypeBoolean(Boolean key){
