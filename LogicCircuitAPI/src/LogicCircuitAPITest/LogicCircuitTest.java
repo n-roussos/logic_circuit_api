@@ -1,7 +1,6 @@
 package LogicCircuitAPITest;
 
 import LogicCircuitAPI.*;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
