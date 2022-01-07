@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="LogicCircuitAPI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/LogicCircuitAPI/out/artifacts/LogicCircuitAPI_jar/LogicCircuitAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
