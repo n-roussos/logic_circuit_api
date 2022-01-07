@@ -14,34 +14,35 @@ public class BooleanConstant extends BooleanExpression{
     private boolean booleanValue;
     private Pair<Boolean, ?> valuePair;
     
-    public BooleanConstant(Pair<Boolean, ?> valuePair) throws Exception {
-        if(valuePair.getKey()== true) {
-            this.valuePair = new Pair<Boolean, Boolean>(true,valuePair.getKey().booleanValue() );
-            {
-                throw new Exception("Invalid Input: expected boolean for second parameter.");
+    public BooleanConstant(Pair<Boolean, ?> valuePair) throws CircuitInputException {
+        if(valuePair.getKey()) {
+            try{
+                this.valuePair = new Pair<>(Boolean.TRUE, (Boolean) valuePair.getValue());
+            }catch (Exception e) {
+                throw new CircuitInputException("Invalid Input: expected boolean for second parameter.");
             }
         }
         else{
             try {
-                Double d = Double.parseDouble(valuePair.getValue().toString());
+                double d = Double.parseDouble(valuePair.getValue().toString());
 
                 if (d < 0 || d > 1) {
-                    throw new Exception("Invalid input: expected a real number between 0 and 1.");
+                    throw new CircuitInputException("Invalid input: expected a real number between 0 and 1.");
                 }
                 else
-                    this.valuePair = new Pair<Boolean, Double>(false,d );
+                    this.valuePair = new Pair<>(Boolean.FALSE, d);
             }
-            catch (Exception ex){
-                    throw new Exception("Invalid input: expected double number for second parameter.");
+            catch (Exception e){
+                    throw new CircuitInputException("Invalid input: expected double number for second parameter.");
             }
         }
     }
 
     public BooleanConstant(boolean constant){
         if(constant)
-            this.valuePair=new Pair<Boolean, Boolean>(Boolean.TRUE, Boolean.TRUE);
+            this.valuePair= new Pair<>(Boolean.TRUE, Boolean.TRUE);
         else
-            this.valuePair=new Pair<Boolean, Boolean>(Boolean.TRUE, Boolean.FALSE);
+            this.valuePair= new Pair<>(Boolean.TRUE, Boolean.FALSE);
         this.booleanValue = constant;
     }
     
