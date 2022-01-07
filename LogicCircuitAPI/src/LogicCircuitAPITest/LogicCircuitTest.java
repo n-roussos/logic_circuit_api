@@ -218,7 +218,7 @@ class LogicCircuitTest {
 //        }
 
 
-        // Integer type case: pass
+        // Integer type case: fail
         try {
             in1.set(new Pair<>(Boolean.FALSE, 1));
             in2.set(new Pair<>(Boolean.FALSE, 0.5));
@@ -232,7 +232,7 @@ class LogicCircuitTest {
         }
 
 
-        // Integer type case: pass
+        // Integer type case: fail
         try {
             in1.set(new Pair<>(Boolean.FALSE, 1));
             in2.set(new Pair<>(Boolean.FALSE, 1));
@@ -245,12 +245,12 @@ class LogicCircuitTest {
             fail();
         }
 
-        // Integer type case: pass
+        // Mixed type case: pass
         try {
             in1.set(new Pair<>(Boolean.TRUE, Boolean.FALSE));
             in2.set(new Pair<>(Boolean.FALSE, 0.5));
 
-            Pair<Boolean, Double> expected = new Pair<>(Boolean.FALSE, 0.5);
+            Pair<Boolean, Double> expected = new Pair<>(Boolean.FALSE, 1.0);
             Pair<Boolean, Double> output = lc.operate();
             assertEquals(expected.getKey(), output.getKey());
             assertEquals(expected.getValue(), output.getValue(), 0.001);
