@@ -62,7 +62,7 @@ public class AndGate extends BooleanBinaryExpression{
         Double pairValue1 = (Double) pair1.getValue();
         Double pairValue2 = (Double) pair2.getValue();
         Double outputValue = pairValue1 * pairValue2;
-        return new Pair<>(Boolean.TRUE, outputValue);
+        return new Pair<>(Boolean.FALSE, outputValue);
     }
 
     private boolean areArgumentsDifferent(Boolean key1, Boolean key2){

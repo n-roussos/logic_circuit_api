@@ -14,4 +14,9 @@ public class LogicCircuit {
         return be.calculate();
     }
 
+    public <T> T operate(){
+        return (T) be.calculatePair();
+    }
+
+
 }

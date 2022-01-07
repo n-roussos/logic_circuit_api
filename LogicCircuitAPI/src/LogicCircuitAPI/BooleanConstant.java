@@ -15,6 +15,22 @@ public class BooleanConstant extends BooleanExpression{
     private Pair<Boolean, ?> valuePair;
     
     public BooleanConstant(Pair<Boolean, ?> valuePair) throws CircuitInputException {
+        set(valuePair);
+    }
+
+    public BooleanConstant(boolean constant){
+        if(constant)
+            this.valuePair= new Pair<>(Boolean.TRUE, Boolean.TRUE);
+        else
+            this.valuePair= new Pair<>(Boolean.TRUE, Boolean.FALSE);
+        this.booleanValue = constant;
+    }
+
+    public void set(boolean value){
+        booleanValue = value;
+    }
+
+    public void set(Pair<Boolean, ?> valuePair) throws CircuitInputException{
         if(valuePair.getKey()) {
             try{
                 this.valuePair = new Pair<>(Boolean.TRUE, (Boolean) valuePair.getValue());
@@ -32,18 +48,10 @@ public class BooleanConstant extends BooleanExpression{
                 else
                     this.valuePair = new Pair<>(Boolean.FALSE, d);
             }
-            catch (Exception e){
-                    throw new CircuitInputException("Invalid input: expected double number for second parameter.");
+            catch (CircuitInputException e){
+                throw new CircuitInputException("Invalid input: expected double number for second parameter.");
             }
         }
-    }
-
-    public BooleanConstant(boolean constant){
-        if(constant)
-            this.valuePair= new Pair<>(Boolean.TRUE, Boolean.TRUE);
-        else
-            this.valuePair= new Pair<>(Boolean.TRUE, Boolean.FALSE);
-        this.booleanValue = constant;
     }
     
     @Override
