@@ -4,10 +4,13 @@
  */
 package LogicCircuitAPI;
 
+import javafx.util.Pair;
+
 /**
  *
  * @author Panikos
  */
 public abstract class BooleanExpression {
     public abstract boolean calculate();
+    public abstract Pair<Boolean, ?> calculatePair();
 }

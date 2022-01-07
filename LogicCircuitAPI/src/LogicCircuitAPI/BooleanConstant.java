@@ -11,15 +11,27 @@ import javafx.util.Pair;
  * @author Panikos
  */
 public class BooleanConstant extends BooleanExpression{
-    private final boolean value;
-    private Pair<Boolean, Double> valuePair;
+    private boolean booleanValue;
+    private Pair<Boolean, ?> valuePair;
     
+    public BooleanConstant(Pair<Boolean, ?> valuePair){
+        this.valuePair = valuePair;
+    }
+
     public BooleanConstant(boolean constant){
-        value = constant;
+        this(constant ?
+                new Pair<Boolean, Boolean>(Boolean.TRUE, Boolean.TRUE) :
+                new Pair<Boolean, Boolean>(Boolean.TRUE, Boolean.FALSE));
+        booleanValue = constant;
     }
     
     @Override
     public boolean calculate(){
-        return value;
+        return booleanValue;
+    }
+
+    @Override
+    public Pair<Boolean, ?> calculatePair() {
+        return valuePair;
     }
 }
