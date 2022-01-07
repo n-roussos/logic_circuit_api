@@ -4,12 +4,15 @@
  */
 package LogicCircuitAPI;
 
+import javafx.util.Pair;
+
 /**
  *
  * @author Panikos
  */
 public class BooleanConstant extends BooleanExpression{
     private final boolean value;
+    private Pair<Boolean, Double> valuePair;
     
     public BooleanConstant(boolean constant){
         value = constant;
