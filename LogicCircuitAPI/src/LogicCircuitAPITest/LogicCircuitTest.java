@@ -1,6 +1,7 @@
 package LogicCircuitAPITest;
 
 import LogicCircuitAPI.*;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -156,16 +157,108 @@ class LogicCircuitTest {
         } catch(CircuitInputException e) {
             fail();
         }
-
-
-//        try {
-//            in1 = new BooleanConstant(new Pair<>(Boolean.FALSE, 0.0));
-//            in2 = new BooleanConstant(new Pair<>(Boolean.FALSE, 2.0));
-//        } catch(CircuitInputException e) {
-//            fail();
-//        }
     }
 
 
+    @Test
+    public void testOtherInputType() {
+        // make the circuit
+        BooleanConstant in1 = null, in2 = null;
+        BooleanExpression andGate, notGate, orGate;
+        LogicCircuit lc = null;
+
+        // test the circuit
+        try{
+            in1 = new BooleanConstant(new Pair<>(Boolean.TRUE, Boolean.TRUE));
+            in2 = new BooleanConstant(new Pair<>(Boolean.TRUE, Boolean.FALSE));
+            andGate = new AndGate(in1, in2);
+            notGate = new NotGate(in1);
+            orGate = new OrGate(andGate, notGate);
+            lc = new LogicCircuit(orGate);
+            assertEquals(new Pair<>(Boolean.TRUE, Boolean.FALSE), lc.operate());
+        }catch (CircuitInputException e){
+            fail();
+        }
+
+//        // String type case: exception
+//        try{
+//            in1.set(new Pair<>(Boolean.TRUE, Boolean.FALSE));
+//            in2.set(new Pair<>(Boolean.TRUE, "Hiba"));
+//            assertEquals(new Pair<>(Boolean.TRUE, Boolean.TRUE), lc.operate());
+//        }catch (CircuitInputException e){
+//            System.out.println("fail at String");
+//            fail();
+//        }
+
+//        // Char type case: exception
+//        try{
+//            Boolean variable1 = Boolean.TRUE;
+//            char variable2 = 'D';
+//            in1.set(new Pair<>(variable1, variable2));
+//            in2.set(new Pair<>(Boolean.TRUE, Boolean.TRUE));
+//            assertEquals(new Pair<>(Boolean.TRUE, Boolean.TRUE), lc.operate());
+//        }catch (CircuitInputException e){
+//            System.out.println("fail at char");
+//            fail();
+//        }
+
+
+//        // Case of number higher than 1.0: exception
+//        try {
+//            in1.set(new Pair<>(Boolean.FALSE, 3.0));
+//            in2.set(new Pair<>(Boolean.FALSE, 0.5));
+//
+//            Pair<Boolean, Double> expected = new Pair<>(Boolean.FALSE, 0.625);
+//            Pair<Boolean, Double> output = lc.operate();
+//            assertEquals(expected.getKey(), output.getKey());
+//            assertEquals(expected.getValue(), output.getValue(), 0.001);
+//        } catch(CircuitInputException e) {
+//            System.out.println("fail at number higher than 1");
+//            fail();
+//        }
+
+
+        // Integer type case: pass
+        try {
+            in1.set(new Pair<>(Boolean.FALSE, 1));
+            in2.set(new Pair<>(Boolean.FALSE, 0.5));
+
+            Pair<Boolean, Double> expected = new Pair<>(Boolean.FALSE, 0.5);
+            Pair<Boolean, Double> output = lc.operate();
+            assertEquals(expected.getKey(), output.getKey());
+            assertEquals(expected.getValue(), output.getValue(), 0.001);
+        } catch(CircuitInputException e) {
+            fail();
+        }
+
+
+        // Integer type case: pass
+        try {
+            in1.set(new Pair<>(Boolean.FALSE, 1));
+            in2.set(new Pair<>(Boolean.FALSE, 1));
+
+            Pair<Boolean, Double> expected = new Pair<>(Boolean.FALSE, 1.0);
+            Pair<Boolean, Double> output = lc.operate();
+            assertEquals(expected.getKey(), output.getKey());
+            assertEquals(expected.getValue(), output.getValue(), 0.001);
+        } catch(CircuitInputException e) {
+            fail();
+        }
+
+        // Integer type case: pass
+        try {
+            in1.set(new Pair<>(Boolean.TRUE, Boolean.FALSE));
+            in2.set(new Pair<>(Boolean.FALSE, 0.5));
+
+            Pair<Boolean, Double> expected = new Pair<>(Boolean.FALSE, 0.5);
+            Pair<Boolean, Double> output = lc.operate();
+            assertEquals(expected.getKey(), output.getKey());
+            assertEquals(expected.getValue(), output.getValue(), 0.001);
+        } catch(CircuitInputException e) {
+            fail();
+        }
+
+
+    }
 
 }
