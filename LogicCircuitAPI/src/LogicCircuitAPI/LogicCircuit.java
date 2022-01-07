@@ -14,8 +14,4 @@ public class LogicCircuit {
         return be.calculate();
     }
 
-    public static void main(String[] args) {
-        
-    }
-
 }
