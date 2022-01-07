@@ -272,21 +272,73 @@ class LogicCircuitTest {
 //            fail();
 //        }
 
-        // True followed by a double float: fail
-        try {
-            in1.set(new Pair<>(Boolean.TRUE, Boolean.FALSE));
-            in2.set(new Pair<>(Boolean.TRUE, 0.5));
+//        // True followed by a double float: fail
+//        try {
+//            in1.set(new Pair<>(Boolean.TRUE, Boolean.FALSE));
+//            in2.set(new Pair<>(Boolean.TRUE, 0.5));
+//
+//            Pair<Boolean, Double> expected = new Pair<>(Boolean.FALSE, 1.0);
+//            Pair<Boolean, Double> output = lc.operate();
+//            assertEquals(expected.getKey(), output.getKey());
+//            assertEquals(expected.getValue(), output.getValue(), 0.001);
+//        } catch(CircuitInputException e) {
+//            System.out.println("Fail at true followed by a double float");
+//            fail();
+//        }
 
-            Pair<Boolean, Double> expected = new Pair<>(Boolean.FALSE, 1.0);
-            Pair<Boolean, Double> output = lc.operate();
-            assertEquals(expected.getKey(), output.getKey());
-            assertEquals(expected.getValue(), output.getValue(), 0.001);
-        } catch(CircuitInputException e) {
-            System.out.println("Fail at true followed by a double float");
+    }
+
+    /** Write your own element type called "gte" that will have two inputs and one output.
+     *  It must be located in the test package.
+     *
+     * The output value will be (true, true) if the double part of x1 >= x2 and (true, false) otherwise.
+     *
+     * Create
+     * circuit for following expression: (x1 and not(x1)) gte x1
+     *
+     * Feed the circuit with (false, 0.5) and verify the result is (true, true)
+     *
+     * Feed the same circuit with (false, 1) and verify the result is (true, false)
+     *
+     * Feed the same circuit with (false, 0) and verify the result is (true, true)
+     */
+    @Test
+    public void testGreaterThanElement() {
+        // make the circuit
+        BooleanConstant in1 = null;
+        BooleanExpression andGate, notGate, gteGate;
+        LogicCircuit lc = null;
+
+        // test the circuit
+        try{
+            in1 = new BooleanConstant(new Pair<>(Boolean.FALSE, 0.5));
+            notGate = new NotGate(in1);
+            andGate = new AndGate(in1, notGate);
+            gteGate = new GreaterOrEqualGate(andGate, in1);
+            lc = new LogicCircuit(gteGate);
+            assertEquals(new Pair<>(Boolean.TRUE, Boolean.FALSE), lc.operate());
+        }catch (CircuitInputException e){
             fail();
         }
 
 
-    }
+        try {
+            in1.set(new Pair<>(Boolean.FALSE, 1.0));
+            assertEquals(new Pair<>(Boolean.TRUE, Boolean.FALSE), lc.operate());
+        } catch(CircuitInputException e) {
+            fail();
+        }
 
+
+        try {
+            in1.set(new Pair<>(Boolean.FALSE, 0.0));
+            assertEquals(new Pair<>(Boolean.TRUE, Boolean.TRUE), lc.operate());
+        } catch(CircuitInputException e) {
+            fail();
+        }
+
+    }
 }
+
+
+
