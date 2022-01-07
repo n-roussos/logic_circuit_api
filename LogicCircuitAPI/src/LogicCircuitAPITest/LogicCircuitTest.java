@@ -1,5 +1,6 @@
-package LogicCircuitAPI;
+package LogicCircuitAPITest;
 
+import LogicCircuitAPI.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
