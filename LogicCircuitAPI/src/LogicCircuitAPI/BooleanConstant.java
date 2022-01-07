@@ -31,26 +31,27 @@ public class BooleanConstant extends BooleanExpression{
     }
 
     public void set(Pair<Boolean, ?> valuePair) throws CircuitInputException{
+        Object value = valuePair.getValue();
+        if (!(value instanceof Boolean) && !(value instanceof Double)){
+            throw new CircuitInputException("Invalid Input: Second parameter should be of type Boolean or Double.");
+        }
         if(valuePair.getKey()) {
-            try{
-                this.valuePair = new Pair<>(Boolean.TRUE, (Boolean) valuePair.getValue());
-            }catch (Exception e) {
-                throw new CircuitInputException("Invalid Input: expected boolean for second parameter.");
+            if (!(value instanceof Boolean)){
+                throw new CircuitInputException("Invalid Input: Second parameter should be of type Boolean.");
             }
+            this.valuePair = new Pair<>(Boolean.TRUE, (Boolean) valuePair.getValue());
         }
         else{
-            try {
-                double d = Double.parseDouble(valuePair.getValue().toString());
+            if (!(value instanceof Double)){
+                throw new CircuitInputException("Invalid Input: Second parameter should be of type Double.");
+            }
+            double d = Double.parseDouble(valuePair.getValue().toString());
 
-                if (d < 0 || d > 1) {
-                    throw new CircuitInputException("Invalid input: expected a real number between 0 and 1.");
-                }
-                else
-                    this.valuePair = new Pair<>(Boolean.FALSE, d);
+            if (d < 0 || d > 1) {
+                throw new CircuitInputException("Invalid input: expected a real number between 0 and 1.");
             }
-            catch (CircuitInputException e){
-                throw new CircuitInputException("Invalid input: expected double number for second parameter.");
-            }
+            else
+                this.valuePair = new Pair<>(Boolean.FALSE, d);
         }
     }
     
