@@ -12,5 +12,5 @@ import javafx.util.Pair;
  */
 public abstract class BooleanExpression {
     public abstract boolean calculate();
-    public abstract Pair<Boolean, ?> calculatePair();
+    public abstract Pair<Boolean, ?> calculatePair() throws CircuitInputException;
 }

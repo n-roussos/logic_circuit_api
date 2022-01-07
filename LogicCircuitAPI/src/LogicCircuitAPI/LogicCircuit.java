@@ -14,7 +14,7 @@ public class LogicCircuit {
         return be.calculate();
     }
 
-    public <T> T operate(){
+    public <T> T operate() throws CircuitInputException {
         return (T) be.calculatePair();
     }
 

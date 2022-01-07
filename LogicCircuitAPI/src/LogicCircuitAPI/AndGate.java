@@ -23,7 +23,7 @@ public class AndGate extends BooleanBinaryExpression{
     }
 
     @Override
-    public Pair<Boolean, ?> calculatePair() {
+    public Pair<Boolean, ?> calculatePair() throws CircuitInputException {
         Pair<Boolean, ?> inputPair1 = in1.calculatePair();
         Pair<Boolean, ?> inputPair2 = in2.calculatePair();
 

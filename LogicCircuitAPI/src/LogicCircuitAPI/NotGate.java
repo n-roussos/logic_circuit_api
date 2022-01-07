@@ -22,7 +22,7 @@ public class NotGate extends BooleanUnaryExpression{
     }
 
     @Override
-    public Pair<Boolean, ?> calculatePair() {
+    public Pair<Boolean, ?> calculatePair() throws CircuitInputException {
         Pair<Boolean, ?> inputPair1 = in1.calculatePair();
         Boolean inputKey1 = inputPair1.getKey();
         if (isTypeBoolean(inputKey1)){
